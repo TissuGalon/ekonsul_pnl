@@ -57,9 +57,9 @@
 
 
                         <li>
-                            <a href="admin-data-bimbingan.php" class="tp-link">
+                            <a href="admin-jurusan-prodi.php" class="tp-link">
                                 <i data-feather="file-text"></i>
-                                <span> Data Bimbingan </span>
+                                <span> Data Jurusan & Prodi </span>
                             </a>
                         </li>
 

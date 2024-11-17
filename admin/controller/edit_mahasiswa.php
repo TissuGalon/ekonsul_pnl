@@ -6,13 +6,12 @@ $conn = getConnection();
 
 // Periksa apakah data dikirim
 if (
-    isset($_POST['user_id'], $_POST['mahasiswaId'], $_POST['nama'], $_POST['nim'], $_POST['jurusan'], $_POST['prodi'], $_POST['semester'])
+    isset($_POST['user_id'], $_POST['mahasiswaId'], $_POST['nama'], $_POST['nim'], $_POST['prodi'], $_POST['semester'])
 ) {
     $user_id = $_POST['user_id'];
     $id = $_POST['mahasiswaId'];
     $nama = $_POST['nama'];
     $nim = $_POST['nim'];
-    $jurusan = $_POST['jurusan'];
     $prodi = $_POST['prodi'];
     $semester = $_POST['semester'];
     $foto = isset($_FILES['foto']) ? $_FILES['foto'] : null;
@@ -63,7 +62,7 @@ if (
         mysqli_stmt_execute($stmt1);
 
         // Perbarui tabel `mahasiswa`
-        $query2 = "UPDATE mahasiswa SET fullname = ?, nim = ?, program_id = ?, semester = ? WHERE user_id = ?";
+        $query2 = "UPDATE mahasiswa SET fullname = ?, nim = ?, prodi_id = ?, semester = ? WHERE user_id = ?";
         $stmt2 = mysqli_prepare($conn, $query2);
         mysqli_stmt_bind_param($stmt2, "ssisi", $nama, $nim, $prodi, $semester, $user_id);
         mysqli_stmt_execute($stmt2);

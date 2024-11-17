@@ -120,7 +120,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const user_id = this.getAttribute("data-user_id");
             const nama = this.getAttribute("data-nama");
             const nim = this.getAttribute("data-nim");
-            const jurusan = this.getAttribute("data-jurusan");
             const prodi = this.getAttribute("data-prodi");
             const semester = this.getAttribute("data-semester");
             const foto = this.getAttribute("data-foto");
@@ -130,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#edit-user_id").value = user_id;
             document.querySelector("#edit-namaLengkap").value = nama;
             document.querySelector("#edit-nimInput").value = nim;
-            document.querySelector("#edit-jurusanSelect").value = jurusan;
             document.querySelector("#edit-prodiSelect").value = prodi;
             document.querySelector("#edit-semesterInput").value = semester;
             document.querySelector("#edit-fotoInput").setAttribute("data-existing", foto);
@@ -150,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const mahasiswaId = document.querySelector("#edit-mahasiswaId").value;
         const nama = document.querySelector("#edit-namaLengkap").value;
         const nim = document.querySelector("#edit-nimInput").value;
-        const jurusan = document.querySelector("#edit-jurusanSelect").value;
         const prodi = document.querySelector("#edit-prodiSelect").value;
         const semester = document.querySelector("#edit-semesterInput").value;
         const fotoInput = document.querySelector("#edit-fotoInput");
@@ -161,7 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
         formData.append("mahasiswaId", mahasiswaId);
         formData.append("nama", nama);
         formData.append("nim", nim);
-        formData.append("jurusan", jurusan);
         formData.append("prodi", prodi);
         formData.append("semester", semester);
 
@@ -275,3 +271,84 @@ $(document).on("click", ".btn-delete", function () {
 });
 
 /* DELETE MAHASISWA */
+
+/* GANTI PASSWORD */
+$(document).ready(function () {
+    // Tampilkan modal dengan ID user
+    $(document).on("click", ".btn-edit-password", function () {
+        const userId = $(this).data("user-id");
+        $("#gantipass-userId").val(userId); // Isi hidden input dengan user_id
+        $("#modalGantiPassword").modal("show");
+    });
+
+    // Proses form submit
+    $("#formGantiPassword").on("submit", function (e) {
+        e.preventDefault();
+
+        // Ambil nilai dari form
+        const userId = $("#gantipass-userId").val();
+        const newPassword = $("#newPassword").val();
+        const confirmPassword = $("#confirmPassword").val();
+
+        // Validasi password
+        if (newPassword !== confirmPassword) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Password dan Konfirmasi Password tidak cocok.",
+            });
+            return;
+        }
+
+        // Kirim data menggunakan AJAX
+        $.ajax({
+            url: "controller/edit_pass_mahasiswa.php", // URL PHP handler
+            method: "POST",
+            data: {
+                user_id: userId,
+                newpass: newPassword,
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Berhasil",
+                        text: "gg Password berhasil diperbarui.",
+                    }).then(() => {
+                        $("#modalGantiPassword").modal("hide"); // Tutup modal
+                        location.reload(); // Reload halaman jika perlu
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: response.message,
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Terjadi Kesalahan",
+                    text: error,
+                });
+            },
+        });
+    });
+});
+
+/* GANTI PASSWORD */
+
+/* View Foto Mahasiswa */
+$(document).on("click", ".foto-mahasiswa", function () {
+    const url = $(this).data("url");
+    const fullname = $(this).data("fullname");
+    const nim = $(this).data("nim");
+
+    // Isi modal dengan data mahasiswa
+    $("#foto-mahasiswa").attr("src", url);
+    $("#nama-mahasiswa").text(fullname);
+    $("#nim-mahasiswa").text(nim);
+});
+/* View Foto Mahasiswa */

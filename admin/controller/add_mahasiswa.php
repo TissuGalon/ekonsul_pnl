@@ -55,7 +55,7 @@ if (
         $user_id = mysqli_insert_id($conn);
 
         // Simpan data ke tabel `mahasiswa`
-        $query2 = "INSERT INTO mahasiswa (user_id, nim, fullname, program_id, semester, bio) VALUES (?, ?, ?, ?, ?, ?)";
+        $query2 = "INSERT INTO mahasiswa (user_id, nim, fullname, prodi_id, semester, bio) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt2 = mysqli_prepare($conn, $query2);
         $bio = "";
         mysqli_stmt_bind_param($stmt2, "isssis", $user_id, $nim, $nama, $prodi, $semester, $bio);

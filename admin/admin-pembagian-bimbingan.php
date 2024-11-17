@@ -1,3 +1,8 @@
+<?php 
+require_once '../controller/koneksi.php';
+$conn = getConnection();
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +27,7 @@
 
 <!-- body start -->
 
-<body data-menu-color="light" data-sidebar="default" <!-- Begin page -->
+<body data-menu-color="light" data-sidebar="default">
     <div id="app-layout">
 
 
@@ -86,56 +91,51 @@
                                             <div class="table-responsive">
                                                 <table class="table table-striped mb-0">
                                                     <thead>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Nama Dosen</th>
-                                                                <th>Mahasiswa Bimbingan</th>
-                                                                <th>Aksi</th>
-
-                                                            </tr>
-                                                        </thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama Mahasiswa</th>
+                                                            <th>Dosen Pembimbing</th>
+                                                            <th>Jenis Bimbingan</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody>
+                                                        <?php 
+                                                        $query = mysqli_query($conn, "SELECT * FROM pembagian_pembimbing");
+                                                         ?>
                                                         <tr>
                                                             <td>1</td>
                                                             <td>Reza Zulman</td>
                                                             <td>
                                                                 <div class="row">
-                                                                    <div class="col-12 ">
-
+                                                                    <div class="col-12">
+                                                                        <!-- Dosen Pembimbing dengan gambar -->
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="d-flex flex-wrap gap-2">
-                                                                    <div class="btn-group btn-group-sm" role="group"
-                                                                        aria-label="Small button group">
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-danger"><i
-                                                                                data-feather="minus"></i></button>
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-success"><i
-                                                                                data-feather="plus"></i></button>
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-primary"><i
-                                                                                data-feather="eye"></i></button>
-                                                                    </div>
+                                                                <!-- Jenis Bimbingan yang lebih terstruktur -->
+                                                                <p>Akademik</p>
+                                                                <p>Akademik</p>
+                                                                <p>Akademik</p>
+                                                            </td>
+                                                            <td>
+                                                                <!-- Tombol Aksi -->
+                                                                <div class="d-grid gap-2" style="grid-template-columns: repeat(2, 1fr);">
+                                                                    <a href="#" class="btn btn-sm btn-warning"><i class="mdi mdi-pencil"></i></a>
+                                                                    <a href="#" class="btn btn-sm btn-danger"><i class="mdi mdi-delete"></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -145,63 +145,56 @@
                                         </div>
                                         <div class="tab-pane" id="bymahasiswa" role="tabpanel">
                                             <div class="table-responsive">
-                                                <table class="table table-striped mb-0">
+                                              <table class="table table-striped mb-0">
                                                     <thead>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Nama Mahasiswa</th>
-                                                                <th>Dosen Pembimbing</th>
-                                                                <th>Aksi</th>
-
-                                                            </tr>
-                                                        </thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama Mahasiswa</th>
+                                                            <th>Dosen Pembimbing</th>
+                                                            <th>Jenis Bimbingan</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
                                                             <td>Reza Zulman</td>
                                                             <td>
                                                                 <div class="row">
-                                                                    <div class="col-12 ">
-
+                                                                    <div class="col-12">
+                                                                        <!-- Dosen Pembimbing dengan gambar -->
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
                                                                         <div class="d-flex align-items-center m-2">
-                                                                            <img src="assets/images/users/user-12.jpg"
-                                                                                class="avatar avatar-sm rounded-circle me-2">
-                                                                            <p class="mb-0">Jenny wilson</p>
+                                                                            <img src="../assets/images/users/user-12.jpg" class="avatar avatar-sm rounded-circle me-2">
+                                                                            <p class="mb-0">Jenny Wilson</p>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <div class="d-flex flex-wrap gap-2">
-                                                                    <div class="btn-group btn-group-sm" role="group"
-                                                                        aria-label="Small button group">
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-danger"><i
-                                                                                data-feather="minus"></i></button>
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-success"><i
-                                                                                data-feather="plus"></i></button>
-                                                                        <button type="button"
-                                                                            class="btn btn-outline-primary"><i
-                                                                                data-feather="eye"></i></button>
-                                                                    </div>
+                                                                <!-- Jenis Bimbingan yang lebih terstruktur -->
+                                                                <p>Akademik</p>
+                                                                <p>Akademik</p>
+                                                                <p>Akademik</p>
+                                                            </td>
+                                                            <td>
+                                                                <!-- Tombol Aksi -->
+                                                                <div class="d-grid gap-2" style="grid-template-columns: repeat(2, 1fr);">
+                                                                    <a href="#" class="btn btn-sm btn-warning"><i class="mdi mdi-pencil"></i></a>
+                                                                    <a href="#" class="btn btn-sm btn-danger"><i class="mdi mdi-delete"></i></a>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
+
                                             </div>
                                         </div>
 
