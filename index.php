@@ -6,11 +6,11 @@ if (!isset($_SESSION['role_id'])) {
     if ($_SESSION['role_id'] == 1) {
         header('location:admin/admin-beranda.php');
     } elseif ($_SESSION['role_id'] == 3) {
-        header('location:mahasiswa-beranda.php');
+        header('location:mahasiswa/mahasiswa-beranda.php');
     } elseif ($_SESSION['role_id'] == 2) {
-        header('location:dosen-beranda.php');
+        header('location:dosen/dosen-beranda.php');
     } else {
-        header('location:login.php');
+        header('location:auth/login.php');
     }
 }
 ?>

@@ -1,23 +1,37 @@
+<?php
+require_once '../controller/koneksi.php';
+$conn = getConnection();
+session_start();
+
+$mahasiswa_data = $_SESSION['mahasiswa_data'];
+$user_id = $mahasiswa_data['user_id'];
+$query = mysqli_query($conn, "SELECT mahasiswa.*, users.*, prodi.*, jurusan.* FROM mahasiswa JOIN users ON mahasiswa.user_id = users.user_id LEFT JOIN prodi ON mahasiswa.prodi_id = prodi.prodi_id LEFT JOIN jurusan ON prodi.jurusan_id = jurusan.jurusan_id WHERE mahasiswa.deleted_at IS NULL AND users.deleted_at IS NULL AND users.user_id = $user_id;");
+$datauser = [];
+if($query){
+    $datauser = mysqli_fetch_assoc($query);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8" />
-    <title>Shared on THEMELOCK.COM - Widgets | Silva - Responsive Admin Dashboard Template</title>
+    <title>E-Konsul</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
     <meta name="author" content="Zoyothemes" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
 
     <!-- App css -->
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
     <!-- Icons -->
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -74,22 +88,18 @@
 
                                         <div class="silva-main-sections">
                                             <div class="silva-profile-main">
-                                                <img src="assets/images/users/man.png"
-                                                    class="rounded-circle img-fluid avatar-xxl img-thumbnail float-start"
-                                                    alt="image profile">
-
+                                                <img src="../media/<?php echo $datauser['profile_photo']; ?>" class="rounded-circle img-fluid avatar-xxl img-thumbnail float-start"  alt="image profile"onerror="this.onerror=null;this.src='../media/blank_profile.jpg';">
                                                 <span class="sil-profile_main-pic-change img-thumbnail">
                                                     <i class="mdi mdi-camera text-white"></i>
                                                 </span>
                                             </div>
 
                                             <div class="overflow-hidden ms-md-4 ms-0">
-                                                <h4 class="m-0 text-primary fs-20 mt-2 mt-md-0"><b>Muhammad Kholis</b>
+                                                <h4 class="m-0 text-primary fs-20 mt-2 mt-md-0"><b><?php echo $datauser['fullname']; ?></b>
                                                 </h4>
-                                                <p class="my-1 text-muted fs-16">2022573010098</p>
+                                                <p class="my-1 text-muted fs-16"><?php echo $datauser['nim']; ?></p>
                                                 <span class="fs-15"><i
-                                                        class="mdi mdi-school me-2 align-middle"></i>Teknologi Informasi
-                                                    & Komputer - Teknik Informatika</span>
+                                                        class="mdi mdi-school me-2 align-middle"></i><?php echo $datauser['jurusan_name']; ?> - <?php echo $datauser['prodi_name']; ?></span>
 
                                                 <hr>
                                                 <p>Dosen Pembimbing :</p>
@@ -138,50 +148,36 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="card-body">
-                                                            <div class="form-group mb-3 row">
-                                                                <label class="form-label">Username</label>
-                                                                <div class="col-lg-12 col-xl-12">
-                                                                    <input class="form-control" type="text"
-                                                                        value="itsprzvl" readonly>
-                                                                </div>
-                                                            </div>
-
+                                                        <div class="card-body">    
                                                             <div class="form-group mb-3 row">
                                                                 <label class="form-label">Nama Lengkap</label>
                                                                 <div class="col-lg-12 col-xl-12">
                                                                     <input class="form-control" type="text"
-                                                                        value="Muhammad Kholis" readonly>
+                                                                        value="<?php echo $datauser['fullname'] ?>" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                                 <label class="form-label">NIM</label>
                                                                 <div class="col-lg-12 col-xl-12">
                                                                     <input class="form-control" type="text"
-                                                                        value="2022573010098" readonly>
+                                                                        value="<?php echo $datauser['nim'] ?>" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                                 <label class="form-label">Jurusan</label>
                                                                 <div class="col-lg-12 col-xl-12">
-                                                                    <input class="form-control" type="text" value="TIK"
+                                                                    <input class="form-control" type="text" value="<?php echo $datauser['jurusan_name'] ?>"
                                                                         readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">
                                                                 <label class="form-label">Prodi</label>
                                                                 <div class="col-lg-12 col-xl-12">
-                                                                    <input class="form-control" type="text" value="TI"
+                                                                    <input class="form-control" type="text" value="<?php echo $datauser['prodi_name'] ?>"
                                                                         readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group mb-3 row">
-                                                                <label class="form-label">Kelas</label>
-                                                                <div class="col-lg-12 col-xl-12">
-                                                                    <input class="form-control" type="text"
-                                                                        value="TI 3B" readonly>
-                                                                </div>
-                                                            </div>
+                        
 
 
                                                         </div><!--end card-body-->
@@ -223,16 +219,16 @@
     <!-- END wrapper -->
 
     <!-- Vendor -->
-    <script src="assets/libs/jquery/jquery.min.js"></script>
-    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
-    <script src="assets/libs/feather-icons/feather.min.js"></script>
+    <script src="../assets/libs/jquery/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="../assets/libs/node-waves/waves.min.js"></script>
+    <script src="../assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="../assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+    <script src="../assets/libs/feather-icons/feather.min.js"></script>
 
     <!-- App js-->
-    <script src="assets/js/app.js"></script>
+    <script src="../assets/js/app.js"></script>
 
 </body>
 

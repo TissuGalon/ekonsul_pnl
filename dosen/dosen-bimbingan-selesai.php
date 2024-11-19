@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Shared on THEMELOCK.COM - Dashboard | Silva - Responsive Admin Dashboard Template</title>
+    <title>E-Konsul</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
     <meta name="author" content="Zoyothemes" />
@@ -28,70 +28,7 @@
 
 
         <!-- Topbar Start -->
-        <div class="topbar-custom">
-            <div class="container-fluid">
-                <div class="d-flex justify-content-between">
-                    <ul class="list-unstyled topnav-menu mb-0 d-flex align-items-center">
-                        <li>
-                            <button class="button-toggle-menu nav-link">
-                                <i data-feather="menu" class="noti-icon"></i>
-                            </button>
-                        </li>
-                        <li class="d-none d-lg-block">
-                            <h5 class="mb-0">Good Morning, Dosen</h5>
-                        </li>
-                    </ul>
-
-                    <ul class="list-unstyled topnav-menu mb-0 d-flex align-items-center">
-
-
-
-                        <li class="d-none d-sm-flex">
-                            <button type="button" class="btn nav-link" data-toggle="fullscreen">
-                                <i data-feather="maximize" class="align-middle fullscreen noti-icon"></i>
-                            </button>
-                        </li>
-
-
-
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/users/user-5.jpg" alt="user-image" class="rounded-circle">
-                                <span class="pro-user-name ms-1">
-                                    Student <i class="mdi mdi-chevron-down"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
-                                <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome !</h6>
-                                </div>
-
-                                <!-- item-->
-                                <a href="pages-profile.html" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
-                                    <span>Profil Saya</span>
-                                </a>
-
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- item-->
-                                <a href="auth-logout.html" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-location-exit fs-16 align-middle"></i>
-                                    <span>Logout</span>
-                                </a>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
+       <?php include 'dosen-topbar.php'; ?>
         <!-- end Topbar -->
 
         <!-- Left Sidebar Start -->
@@ -99,74 +36,7 @@
             <div class="h-100" data-simplebar>
 
                 <!--- Sidemenu -->
-                <div id="sidebar-menu">
-
-                    <div class="logo-box">
-                        <a href="index.html" class="logo logo-light">
-                            <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="assets/images/logo-light.png" alt="" height="24">
-                            </span>
-                        </a>
-                        <a href="index.html" class="logo logo-dark">
-                            <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="assets/images/logo-dark.png" alt="" height="24">
-                            </span>
-                        </a>
-                    </div>
-
-                    <ul id="side-menu">
-
-                        <li class="menu-title">Menu</li>
-
-                        <li>
-                            <a href="dosen-beranda.html" class="tp-link">
-                                <i data-feather="home"></i>
-                                <span> Beranda </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="dosen-mahasiswa-bimbingan.html" class="tp-link">
-                                <i data-feather="users"></i>
-                                <span> Mahasiswa Bimbingan</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="dosen-permintaan-bimbingan.html" class="tp-link">
-                                <i data-feather="list"></i>
-                                <span> Permintaan Bimbingan </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="dosen-bimbingan-selesai.html" class="tp-link">
-                                <i data-feather="check-square"></i>
-                                <span> Bimbingan Selesai </span>
-                            </a>
-                        </li>
-
-
-                        <li class="menu-title">Lainnya</li>
-
-
-
-                        <li>
-                            <a href="logout.html" class="tp-link">
-                                <i data-feather="log-out"></i>
-                                <span> Logout </span>
-                            </a>
-                        </li>
-
-                    </ul>
-
-
-                </div>
+                <?php include 'dosen-sidebar.php'; ?>
                 <!-- End Sidebar -->
 
                 <div class="clearfix"></div>

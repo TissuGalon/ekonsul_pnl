@@ -1,0 +1,120 @@
+<?php 
+require_once '../controller/koneksi.php';
+$conn = getConnection();
+session_start();
+
+if (isset($_SESSION['mahasiswa_data'])) {
+    $data = $_SESSION['mahasiswa_data'];
+    $sender_id = $data['user_id'];
+} elseif (isset($_SESSION['dosen_data'])) {
+    $data = $_SESSION['dosen_data'];
+    $sender_id = $data['user_id'];
+} else {
+    header('location: ../index.php');
+}
+
+$receiver_id = $_GET['receiver_id'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .chat-bubble {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            max-width: 70%;
+        }
+        .chat-bubble.sender {
+            background-color: #007bff;
+            color: #fff;
+            margin-left: auto;
+        }
+        .chat-bubble.receiver {
+            background-color: #e9ecef;
+            color: #000;
+            margin-right: auto;
+        }
+        .chat-header {
+            font-weight: bold;
+            color: #fff;
+            background-color: #343a40;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+       <button class="btn btn-secondary mb-3" onclick="history.back()">&#8592; Back</button>
+       <div class="card shadow">
+        <div class="chat-header text-center">
+            Chat Room
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will be dynamically loaded here -->
+        </div>
+        <div class="card-body">
+            <form id="chat-form" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input type="text" name="message" id="message" class="form-control" placeholder="Type your message">
+                    <input type="file" name="document" id="document" class="form-control" style="max-width: 150px;">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const senderId = <?php echo $sender_id; ?>; 
+        const receiverId = <?php echo $receiver_id; ?>;
+
+        function loadMessages() {
+            $.get('load_messages.php', {sender_id: senderId, receiver_id: receiverId}, function (data) {
+                $('#chat-box').html(data);
+                $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight);
+            });
+        }
+
+        $('#chat-form').on('submit', function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            formData.append('sender_id', senderId);
+            formData.append('receiver_id', receiverId);
+
+            $.ajax({
+                url: 'save_message.php',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    $('#message').val('');
+                    $('#document').val('');
+                    loadMessages();
+                }
+            });
+        });
+
+        loadMessages();
+        setInterval(loadMessages, 2000); 
+    });
+</script>
+</body>
+</html>

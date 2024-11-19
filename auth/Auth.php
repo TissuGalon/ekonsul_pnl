@@ -62,7 +62,7 @@ function login($login_id, $password)
                     header("Location: ../admin/admin-beranda.php");
                     break;
                 case 2: // Role Dosen
-                    header("Location: ../dosen/dosen_dashboard.php");
+                    header("Location: ../dosen/dosen-beranda.php");
                     break;
                 case 3: // Role Mahasiswa
                     header("Location: ../index.php");
