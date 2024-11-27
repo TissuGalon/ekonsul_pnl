@@ -1,3 +1,8 @@
+<?php
+session_start();
+include '../controller/koneksi.php';
+$conn = getConnection();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,6 +55,16 @@
                         </div>
                     </div>
 
+
+                    <?php
+                    $query1 = mysqli_query($conn, "SELECT * FROM mahasiswa ");
+                    $mahasiswa = mysqli_num_rows($query1);
+                    $query2 = mysqli_query($conn, "SELECT * FROM dosen ");
+                    $dosen = mysqli_num_rows($query2);
+                    $query3 = mysqli_query($conn, "SELECT * FROM konseling ");
+                    $konseling = mysqli_num_rows($query3);
+                    ?>
+
                     <!-- start row -->
                     <div class="row">
 
@@ -76,7 +91,7 @@
                                                     <p class="mb-0 text-dark fs-15">Data Mahasiswa</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="mb-0 fs-22 text-black me-3">200</h3>
+                                                    <h3 class="mb-0 fs-22 text-black me-3"><?php echo $mahasiswa; ?></h3>
                                                     <p class="text-dark fs-13 mb-0">Mahasiswa Aktif</p>
                                                 </div>
                                             </div>
@@ -105,7 +120,7 @@
                                                     <p class="mb-0 text-dark fs-15">Data Dosen</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="mb-0 fs-22 text-black me-3">30</h3>
+                                                    <h3 class="mb-0 fs-22 text-black me-3"><?php echo $mahasiswa; ?></h3>
                                                     <p class="text-dark fs-13 mb-0">Dosen Aktif</p>
                                                 </div>
                                             </div>
@@ -113,35 +128,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Pembagian Bimbingan -->
-                                <div class="col-md-6 col-xl-6">
-                                    <div class="card mb-0">
-                                        <div class="card-body">
-                                            <div class="widget-first">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <div
-                                                        class="p-2 border border-danger border-opacity-10 bg-danger-subtle rounded-pill me-2">
-                                                        <div class="bg-danger rounded-circle widget-size text-center">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                height="20" viewBox="0 0 24 24">
-                                                                <path fill="none" stroke="#ffffff"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="1.5"
-                                                                    d="M19 9H6.659c-1.006 0-1.51 0-1.634-.309c-.125-.308.23-.672.941-1.398L8.211 5M5 15h12.341c1.006 0 1.51 0 1.634.309c.125.308-.23.672-.941 1.398L15.789 19"
-                                                                    color="#ffffff"></path>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                    <p class="mb-0 text-dark fs-15">Pembagian Bimbingan</p>
-                                                </div>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="mb-0 fs-22 text-black me-3">45</h3>
-                                                    <p class="text-dark fs-13 mb-0">Bimbingan Terdaftar</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              
 
                                 <!-- Data Riwayat Bimbingan -->
                                 <div class="col-md-6 col-xl-6">
@@ -163,7 +150,7 @@
                                                     <p class="mb-0 text-dark fs-15">Data Riwayat Bimbingan</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="mb-0 fs-22 text-black me-3">150</h3>
+                                                    <h3 class="mb-0 fs-22 text-black me-3"><?php echo $konseling; ?></h3>
                                                     <p class="text-dark fs-13 mb-0">Bimbingan</p>
                                                 </div>
                                             </div>

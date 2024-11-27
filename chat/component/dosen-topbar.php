@@ -30,7 +30,7 @@
                                 role="button" aria-haspopup="false" aria-expanded="false">
                                 <!-- <img src="../assets/images/users/user-5.jpg" alt="user-image" class="rounded-circle">-->
                                 <span class="pro-user-name ms-1">
-                                    Dosen <i class="mdi mdi-chevron-down"></i>
+                                    Student <i class="mdi mdi-chevron-down"></i>
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -40,7 +40,7 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="#" class="dropdown-item notify-item">
+                                <a href="pages-profile.html" class="dropdown-item notify-item">
                                     <i class="mdi mdi-account-circle-outline fs-16 align-middle"></i>
                                     <span>Profil Saya</span>
                                 </a>

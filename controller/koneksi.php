@@ -4,7 +4,7 @@ function getConnection()
     $host = 'localhost';
     $user = 'root';
     $password = '';
-    $database = 'konsultasi_mhs';
+    $database = 'konsultasi_mhs2';
 
     $conn = new mysqli($host, $user, $password, $database);
 
