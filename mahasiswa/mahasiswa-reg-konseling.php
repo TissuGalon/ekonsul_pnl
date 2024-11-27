@@ -1,10 +1,10 @@
-<?php 
+<?php
 require_once '../controller/koneksi.php';
 $conn = getConnection();
 session_start();
 
 $mahasiswa_data = $_SESSION['mahasiswa_data'];
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,19 +42,19 @@ $mahasiswa_data = $_SESSION['mahasiswa_data'];
             $status = $_GET['status'];
             $message = urldecode($_GET['message']);
             ?>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    Swal.fire({
-                        icon: '<?php echo $status == "success" ? "success" : "error"; ?>',
-                        title: '<?php echo $status == "success" ? "Berhasil!" : "Gagal!"; ?>',
-                        text: '<?php echo $message; ?>',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                         window.location.href = '<?php echo $status == "success" ? "mahasiswa-data-konseling.php" : "mahasiswa-reg-konseling.php"; ?>';
-                    });
-                });
-            </script>
-            <?php
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    Swal.fire({
+                                        icon: '<?php echo $status == "success" ? "success" : "error"; ?>',
+                                        title: '<?php echo $status == "success" ? "Berhasil!" : "Gagal!"; ?>',
+                                        text: '<?php echo $message; ?>',
+                                        confirmButtonText: 'OK'
+                                    }).then((result) => {
+                                         window.location.href = '<?php echo $status == "success" ? "mahasiswa-data-konseling.php" : "mahasiswa-reg-konseling.php"; ?>';
+                                    });
+                                });
+                            </script>
+                            <?php
         }
         ?>
 
@@ -110,11 +110,11 @@ $mahasiswa_data = $_SESSION['mahasiswa_data'];
                                             <label for="" class="form-label">Dosen</label>
                                             <select name="lecturer_id" class="form-select form-select-lg" required>
                                                 <option selected="selected" value="">Pilih Dosen</option>
-                                                <?php 
+                                                <?php
                                                 $mahasiswa_id = $mahasiswa_data['mahasiswa_id'];
-                                                $query = mysqli_query($conn, "SELECT * FROM pembagian_pembimbing JOIN dosen ON pembagian_pembimbing.dosen_id = dosen.dosen_id WHERE mahasiswa_id = $mahasiswa_id");
-                                                while($row = mysqli_fetch_array($query)){ ?>
-                                                    <option  value="<?php echo $row['dosen_id'] ?>"><?php echo $row['fullname'] ?> (Pembimbing <?php echo $row['jenis_bimbingan'] ?>)</option>
+                                                $query = mysqli_query($conn, "SELECT * FROM dosen_mahasiswa JOIN dosen ON dosen_mahasiswa.lecturer_id = dosen.dosen_id WHERE student_id = $mahasiswa_id");
+                                                while ($row = mysqli_fetch_array($query)) { ?>
+                                                                    <option  value="<?php echo $row['dosen_id'] ?>"><?php echo $row['fullname'] ?> (Pembimbing <?php echo $row['tipe_bimbingan'] ?>)</option>
                                                 <?php } ?>
                                                 <!-- Options here -->
                                             </select>

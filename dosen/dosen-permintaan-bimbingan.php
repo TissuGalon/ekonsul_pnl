@@ -41,19 +41,19 @@ $dosen_data = $_SESSION['dosen_data'];
             $status = $_GET['status'];
             $message = urldecode($_GET['message']);
             ?>
-                            <script>
-                                document.addEventListener("DOMContentLoaded", function() {
-                                    Swal.fire({
-                                        icon: '<?php echo $status == "success" ? "success" : "error"; ?>',
-                                        title: '<?php echo $status == "success" ? "Berhasil!" : "Gagal!"; ?>',
-                                        text: '<?php echo $message; ?>',
-                                        confirmButtonText: 'OK'
-                                    }).then((result) => {
-                                        window.location.href = '<?php echo $status == "success" ? "dosen-permintaan-bimbingan.php" : "dosen-permintaan-bimbingan.php"; ?>';
-                                    });
-                                });
-                            </script>
-                            <?php
+                                        <script>
+                                            document.addEventListener("DOMContentLoaded", function() {
+                                                Swal.fire({
+                                                    icon: '<?php echo $status == "success" ? "success" : "error"; ?>',
+                                                    title: '<?php echo $status == "success" ? "Berhasil!" : "Gagal!"; ?>',
+                                                    text: '<?php echo $message; ?>',
+                                                    confirmButtonText: 'OK'
+                                                }).then((result) => {
+                                                    window.location.href = '<?php echo $status == "success" ? "dosen-permintaan-bimbingan.php" : "dosen-permintaan-bimbingan.php"; ?>';
+                                                });
+                                            });
+                                        </script>
+                                        <?php
         }
         ?>
         
@@ -138,112 +138,112 @@ $dosen_data = $_SESSION['dosen_data'];
                                                     $query = mysqli_query($conn, "SELECT * FROM konseling JOIN mahasiswa ON konseling.mahasiswa_id = mahasiswa.mahasiswa_id WHERE status != 'Dibatalkan' AND status != 'Selesai' AND dosen_id = $dosen_id;");
                                                     while ($row = mysqli_fetch_array($query)) {
                                                         ?>
-                                                                        <tr>
-                                                                            <th scope="row">
-                                                                                <?php echo $no++; ?>
-                                                                            </th>
-                                                                            <td>
-                                                                                <?php echo $row['tujuan_konseling'] ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <b class="text-primary">
-                                                                                    <?php echo $row['fullname'] ?>
-                                                                                </b>
-                                                                                <br>
-                                                                                <?php echo $row['nim'] ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <?php echo $row['jenis_konseling'] ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <b>
-                                                                                    <?php echo $row['tanggal_konseling'] ?>
-                                                                                </b>
-                                                                                <br>
-                                                                                <?php echo $row['waktu_mulai'] ?> -
-                                                                                <?php echo $row['waktu_selesai'] ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <?php
-                                                                                if ($row['lampiran'] != null || $row['lampiran'] != '') { ?>
-                                                                                                    <a href="../media/uploads/<?php echo $row['lampiran'] ?>"
-                                                                                                        style="display:inline-block;max-width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                                                                                                        class="btn btn-sm btn-success"><i
-                                                                                                        data-feather="file-text"></i>
-                                                                                                        <?php echo $row['lampiran'] ?>
-                                                                                                    </a>
-                                                                                    <?php } else { ?>
-                                                                                                        <a href="#"
-                                                                                                        style="display:inline-block;max-width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
-                                                                                                        class="btn btn-sm btn-dark"><i
-                                                                                                        data-feather="file"></i>
-                                                                                                        <?php echo $row['lampiran'] ?> Tidak ada
-                                                                                                    </a>
-                                                                                    <?php }
-                                                                                ?>
-                                                                    
-                                                                                </td>
-                                                                                <td>
-                                                                                    <?php
-                                                                                    switch ($row['status']) {
-                                                                                        case 'Diajukan':
-                                                                                            $color = 'primary';
-                                                                                            break;
-                                                                                        case 'Diterima':
-                                                                                            $color = 'success';
-                                                                                            break;
-                                                                                        case 'Jadwal Ulang':
-                                                                                            $color = 'warning';
-                                                                                            break;
-                                                                                        case 'Ditolak':
-                                                                                            $color = 'danger';
-                                                                                            break;
-                                                                                        case 'Selesai':
-                                                                                            $color = 'success';
-                                                                                            break;
-                                                                                        default:
-                                                                                            $color = 'primary';
-                                                                                            break;
-                                                                                    }
-                                                                                    ?>
-                                                                                    <div class="badge text-bg-<?php echo $color; ?>">
-                                                                                        <?php echo $row['status'] ?>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td class="d-flex" style="padding: 15px;">
-                                                                                    <?php
-                                                                                    if ($row['status'] == 'Diajukan') { ?>
-                                                                                                        <a href="controller/terima.php?id_konseling=<?php echo $row['id_konseling'] ?>"
-                                                                                                            class="btn btn-primary btn-icon">
-                                                                                                            <i>Terima</i>
-                                                                                                        </a>
-                                                                                                        <div class="me-2"></div>
-                                                                                                        <a href="controller/jadwal-ulang.php?id_konseling=<?php echo $row['id_konseling'] ?>"
-                                                                                                            class="btn btn-warning btn-icon">
-                                                                                                            <i>Jadwal Ulang</i>
-                                                                                                        </a>
-                                                                                        <?php } elseif ($row['status'] == 'Selesai' || $row['status'] == 'Berlangsung' || $row['status'] == 'Diterima') { ?>
-                                                                                                            <a href="../chat/chat.php?receiver_id=<?php echo $row['user_id'] ?>"
-                                                                                                                class="btn btn-success btn-icon">
-                                                                                                                <i>Chat</i>
-                                                                                                            </a>
-                                                                                                            <div class="me-2"></div>
-                                                                                                            <a href="controller/batalkan.php?id_konseling=<?php echo $row['id_konseling'] ?>"
-                                                                                                                class="btn btn-danger btn-icon">
-                                                                                                                <i>Batalkan</i>
-                                                                                                            </a>
-                                                                                            <?php } elseif ($row['status'] == 'Jadwal Ulang') { ?>
-                                                                                                                <a href="controller/batal-jadwal-ulang.php?id_konseling=<?php echo $row['id_konseling'] ?>"
-                                                                                                                    class="btn btn-danger btn-icon">
-                                                                                                                    <i>Batalkan Jadwal Ulang</i>
-                                                                                                                </a>
+                                                                                    <tr>
+                                                                                        <th scope="row">
+                                                                                            <?php echo $no++; ?>
+                                                                                        </th>
+                                                                                        <td>
+                                                                                            <?php echo $row['tujuan_konseling'] ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <b class="text-primary">
+                                                                                                <?php echo $row['fullname'] ?>
+                                                                                            </b>
+                                                                                            <br>
+                                                                                            <?php echo $row['nim'] ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <?php echo $row['jenis_konseling'] ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <b>
+                                                                                                <?php echo $row['tanggal_konseling'] ?>
+                                                                                            </b>
+                                                                                            <br>
+                                                                                            <?php echo $row['waktu_mulai'] ?> -
+                                                                                            <?php echo $row['waktu_selesai'] ?>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <?php
+                                                                                            if ($row['lampiran'] != null || $row['lampiran'] != '') { ?>
+                                                                                                                            <a href="../media/uploads/<?php echo $row['lampiran'] ?>"
+                                                                                                                                style="display:inline-block;max-width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                                                                                                                class="btn btn-sm btn-success"><i
+                                                                                                                                data-feather="file-text"></i>
+                                                                                                                                <?php echo $row['lampiran'] ?>
+                                                                                                                            </a>
                                                                                                 <?php } else { ?>
-                                                                                                                    <a href="#" class="btn btn-success disabled btn-icon">
-                                                                                                                        <i>Chat</i>
-                                                                                                                    </a>
-                                                                                                    <?php } ?>
-                                                                                                </td>
-                                                                                            </tr>
+                                                                                                                                <a href="#"
+                                                                                                                                style="display:inline-block;max-width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+                                                                                                                                class="btn btn-sm btn-dark"><i
+                                                                                                                                data-feather="file"></i>
+                                                                                                                                <?php echo $row['lampiran'] ?> Tidak ada
+                                                                                                                            </a>
+                                                                                                <?php }
+                                                                                            ?>
+                                                                    
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <?php
+                                                                                                switch ($row['status']) {
+                                                                                                    case 'Diajukan':
+                                                                                                        $color = 'primary';
+                                                                                                        break;
+                                                                                                    case 'Diterima':
+                                                                                                        $color = 'success';
+                                                                                                        break;
+                                                                                                    case 'Jadwal Ulang':
+                                                                                                        $color = 'warning';
+                                                                                                        break;
+                                                                                                    case 'Ditolak':
+                                                                                                        $color = 'danger';
+                                                                                                        break;
+                                                                                                    case 'Selesai':
+                                                                                                        $color = 'success';
+                                                                                                        break;
+                                                                                                    default:
+                                                                                                        $color = 'primary';
+                                                                                                        break;
+                                                                                                }
+                                                                                                ?>
+                                                                                                <div class="badge text-bg-<?php echo $color; ?>">
+                                                                                                    <?php echo $row['status'] ?>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td class="d-flex" style="padding: 15px;">
+                                                                                                <?php
+                                                                                                if ($row['status'] == 'Diajukan') { ?>
+                                                                                                                                <a href="controller/terima.php?id_konseling=<?php echo $row['id_konseling'] ?>"
+                                                                                                                                    class="btn btn-primary btn-icon">
+                                                                                                                                    <i>Terima</i>
+                                                                                                                                </a>
+                                                                                                                                <div class="me-2"></div>
+                                                                                                                                <a href="controller/jadwal-ulang.php?id_konseling=<?php echo $row['id_konseling'] ?>"
+                                                                                                                                    class="btn btn-warning btn-icon">
+                                                                                                                                    <i>Jadwal Ulang</i>
+                                                                                                                                </a>
+                                                                                                    <?php } elseif ($row['status'] == 'Selesai' || $row['status'] == 'Berlangsung' || $row['status'] == 'Diterima') { ?>
+                                                                                                                                    <a href="../chat/chat.php?receiver_id=<?php echo $row['user_id'] ?>"
+                                                                                                                                        class="btn btn-success btn-icon">
+                                                                                                                                        <i>Chat</i>
+                                                                                                                                    </a>
+                                                                                                                                    <div class="me-2"></div>
+                                                                                                                                    <a href="controller/batalkan.php?id_konseling=<?php echo $row['id_konseling'] ?>"
+                                                                                                                                        class="btn btn-danger btn-icon">
+                                                                                                                                        <i>Batalkan</i>
+                                                                                                                                    </a>
+                                                                                                        <?php } elseif ($row['status'] == 'Jadwal Ulang') { ?>
+                                                                                                                                        <a href="controller/batal-jadwal-ulang.php?id_konseling=<?php echo $row['id_konseling'] ?>"
+                                                                                                                                            class="btn btn-danger btn-icon">
+                                                                                                                                            <i>Batalkan Jadwal Ulang</i>
+                                                                                                                                        </a>
+                                                                                                            <?php } else { ?>
+                                                                                                                                            <a href="#" class="btn btn-success disabled btn-icon">
+                                                                                                                                                <i>Chat</i>
+                                                                                                                                            </a>
+                                                                                                                <?php } ?>
+                                                                                                            </td>
+                                                                                                        </tr>
                                                                             <?php } ?>
                                                                         </tbody>
                                                                     </table>
@@ -260,7 +260,7 @@ $dosen_data = $_SESSION['dosen_data'];
                                                             <div class="card-icon">
                                                                 <i class="fas fa-edit fs-14 text-muted white"></i>
                                                             </div>
-                                                            <h4 class="card-title mb-0 text-white">Bimbingan Mendatang</h4>
+                                                            <h4 class="card-title mb-0 text-white">Bimbingan Selesai</h4>
                                                         </div>
                                                         <div class="card-body">
                                                             <div class="table-responsive">
@@ -281,39 +281,15 @@ $dosen_data = $_SESSION['dosen_data'];
                                                                     <tbody>
                                                                         
                                                                         <tr>
-                                                                            <th scope="row">1</th>
-                                                                            <td>2022573010098</td>
-                                                                            <td>Muhammad Kholis</td>
-                                                                            <td>TI</td>
-                                                                            <td>Akademik</td>
-                                                                            <td>Topik</td>
-                                                                            <td><b class="text-primary">Senin,11 November 2024 13:00 -
-                                                                                14:00</b>
-                                                                            </td>
-                                                                            <td>
-                                                                                <div class="badge text-bg-primary">Mengunggu</div>
-                                                                            </td>
-                                                                            <td>
-                                                                                <a href="#" class="btn btn-sm btn-primary text-truncate"
-                                                                                style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                                                <i data-feather="file-text"></i> Lorem ipsum dolor
-                                                                                sit amet
-                                                                                consectetur, adipisicing elit. Pariatur quod error
-                                                                                aspernatur sed recusandae dicta voluptatibus harum,
-                                                                                ipsa
-                                                                                nostrum omnis, voluptatum dignissimos quas atque
-                                                                                explicabo
-                                                                                dolor neque tempora, at fugiat?
-                                                                            </a>
-                                                                            
-                                                                        </td>
-                                                                        
-                                                                        <td class="d-flex">
-                                                                            <a href="#!" class="btn btn-secondary btn-icon">
-                                                                                <i data-feather="clock"></i>
-                                                                                Jadwalkan Ulang
-                                                                            </a>
-                                                                        </td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
+                                                                          <td></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="10" class="text-center">Tidak ada</td>

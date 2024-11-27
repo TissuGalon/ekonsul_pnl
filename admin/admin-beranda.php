@@ -120,7 +120,7 @@ $conn = getConnection();
                                                     <p class="mb-0 text-dark fs-15">Data Dosen</p>
                                                 </div>
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <h3 class="mb-0 fs-22 text-black me-3"><?php echo $mahasiswa; ?></h3>
+                                                    <h3 class="mb-0 fs-22 text-black me-3"><?php echo $dosen; ?></h3>
                                                     <p class="text-dark fs-13 mb-0">Dosen Aktif</p>
                                                 </div>
                                             </div>

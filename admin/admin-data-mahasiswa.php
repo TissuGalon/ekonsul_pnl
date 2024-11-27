@@ -343,8 +343,7 @@ $conn = getConnection();
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table id="Table1" class="table table-striped mb-0">
-                                            <thead>
+                                        <table id="Table1" class="table table-striped mb-0">                                        
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -363,82 +362,82 @@ $conn = getConnection();
                                                     $query = mysqli_query($conn, "SELECT mahasiswa.*, users.*, prodi.*, jurusan.* FROM mahasiswa JOIN users ON mahasiswa.user_id = users.user_id LEFT JOIN prodi ON mahasiswa.prodi_id = prodi.prodi_id LEFT JOIN jurusan ON prodi.jurusan_id = jurusan.jurusan_id WHERE mahasiswa.deleted_at IS NULL AND users.deleted_at IS NULL;");
                                                     while ($row = mysqli_fetch_array($query)) {
                                                         ?>
-                                                        <tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $no++; ?>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="flex-shrink-0 align-self-center foto-mahasiswa"
+                                                                        style="cursor: pointer;">
+                                                                        <div class="align-content-center text-center border border-dashed rounded-circle p-1 foto-mahasiswa"
+                                                                        style="width: 50px; height: 50px;"
+                                                                        data-url="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
+                                                                        data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
+                                                                        data-nim="<?php echo htmlspecialchars($row['nim']); ?>"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modalFotoMahasiswa">
+                                                                        <img src="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
+                                                                        onerror="this.onerror=null; this.src='../media/blank_profile.png';"
+                                                                        class="avatar avatar-sm rounded-circle"
+                                                                        style="width: 100%; height: 100%; object-fit: cover;"
+                                                                        alt="Foto Mahasiswa">
+                                                                    </div>
+                                                            
+                                                            
+                                                                </div>
+                                                            </td>
+                                                    
                                                             <td>
-                                                                <?php echo $no++; ?>
+                                                                <?php echo $row['nim']; ?>
                                                             </td>
                                                             <td>
-                                                                <div class="flex-shrink-0 align-self-center foto-mahasiswa"
-                                                                style="cursor: pointer;">
-                                                                <div class="align-content-center text-center border border-dashed rounded-circle p-1 foto-mahasiswa"
-                                                                style="width: 50px; height: 50px;"
-                                                                data-url="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
-                                                                data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
-                                                                data-nim="<?php echo htmlspecialchars($row['nim']); ?>"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#modalFotoMahasiswa">
-                                                                <img src="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
-                                                                onerror="this.onerror=null; this.src='../media/blank_profile.png';"
-                                                                class="avatar avatar-sm rounded-circle"
-                                                                style="width: 100%; height: 100%; object-fit: cover;"
-                                                                alt="Foto Mahasiswa">
+                                                                <?php echo $row['fullname']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['jurusan_name']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo $row['prodi_name']; ?>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <?php echo $row['semester']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="d-grid gap-2"
+                                                                    style="grid-template-columns: repeat(2, 1fr);">
+                                                                    <button id="btn-edit-<?php echo $row['mahasiswa_id']; ?>"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-title="Edit Data Mahasiswa"
+                                                                        class="btn btn-sm btn-warning btn-edit-mahasiswa"
+                                                                        data-user_id="<?php echo $row['user_id']; ?>"
+                                                                        data-id="<?php echo $row['mahasiswa_id']; ?>"
+                                                                        data-nama="<?php echo $row['fullname']; ?>"
+                                                                        data-nim="<?php echo $row['nim']; ?>"
+                                                                        data-prodi="<?php echo $row['prodi_id']; ?>"
+                                                                        data-semester="<?php echo $row['semester']; ?>"
+                                                                        data-foto="<?php echo $row['profile_photo']; ?>">
+                                                                        <i class="mdi mdi-pencil"></i>
+                                                                    </button>
+                                                            
+                                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip"
+                                                                    data-bs-title="Hapus Data Mahasiswa"
+                                                                    class="btn btn-sm btn-danger btn-delete"
+                                                                    data-id="<?php echo $row['user_id']; ?>">
+                                                                    <i class="mdi mdi-delete"></i>
+                                                                </a>
+                                                        
+                                                                <button class="btn btn-sm btn-info btn-edit-password"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-title="Ganti Password Mahasiswa"
+                                                                data-user-id="<?php echo $row['user_id']; ?>"><i
+                                                                class="mdi mdi-key"></i></button>
                                                             </div>
-                                                            
-                                                            
                                                         </div>
                                                     </td>
-                                                    
-                                                    <td>
-                                                        <?php echo $row['nim']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row['fullname']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row['jurusan_name']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row['prodi_name']; ?>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <?php echo $row['semester']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <div class="d-grid gap-2"
-                                                            style="grid-template-columns: repeat(2, 1fr);">
-                                                            <button id="btn-edit-<?php echo $row['mahasiswa_id']; ?>"
-                                                                data-bs-toggle="tooltip"
-                                                                data-bs-title="Edit Data Mahasiswa"
-                                                                class="btn btn-sm btn-warning btn-edit-mahasiswa"
-                                                                data-user_id="<?php echo $row['user_id']; ?>"
-                                                                data-id="<?php echo $row['mahasiswa_id']; ?>"
-                                                                data-nama="<?php echo $row['fullname']; ?>"
-                                                                data-nim="<?php echo $row['nim']; ?>"
-                                                                data-prodi="<?php echo $row['prodi_id']; ?>"
-                                                                data-semester="<?php echo $row['semester']; ?>"
-                                                                data-foto="<?php echo $row['profile_photo']; ?>">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </button>
-                                                            
-                                                            <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                            data-bs-title="Hapus Data Mahasiswa"
-                                                            class="btn btn-sm btn-danger btn-delete"
-                                                            data-id="<?php echo $row['user_id']; ?>">
-                                                            <i class="mdi mdi-delete"></i>
-                                                        </a>
-                                                        
-                                                        <button class="btn btn-sm btn-info btn-edit-password"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-title="Ganti Password Mahasiswa"
-                                                        data-user-id="<?php echo $row['user_id']; ?>"><i
-                                                        class="mdi mdi-key"></i></button>
-                                                    </div>
-                                                </div>
-                                            </td>
                                             
                                             
-                                        </tr>
+                                                </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>

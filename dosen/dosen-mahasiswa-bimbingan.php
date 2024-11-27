@@ -71,6 +71,28 @@ $user_id = $dosen_data['user_id'];
                         </div>
                     </div>
 
+                    <?php
+                    $no = 1;
+                    $dosen_id = $dosen_data['dosen_id'];
+                    $query = mysqli_query($conn, "SELECT 
+                                                        dosen_mahasiswa.*,
+                                                        mahasiswa.*,
+                                                        prodi.prodi_name AS prodi_nama,
+                                                        jurusan.jurusan_name AS jurusan_nama
+                                                        FROM 
+                                                        dosen_mahasiswa
+                                                        JOIN 
+                                                        mahasiswa ON dosen_mahasiswa.student_id = mahasiswa.mahasiswa_id
+                                                        JOIN 
+                                                        prodi ON mahasiswa.prodi_id = prodi.prodi_id
+                                                        JOIN 
+                                                        jurusan ON prodi.jurusan_id = jurusan.jurusan_id
+                                                        WHERE 
+                                                        dosen_mahasiswa.lecturer_id = $dosen_id;
+                                                        ");
+                    $jumlah = mysqli_num_rows($query);
+                    ?>
+
                     <!-- start row -->
                     <div class="row">
                         <div class="col-12">
@@ -93,7 +115,7 @@ $user_id = $dosen_data['user_id'];
                                         </div>
                                         <p class="mb-0 text-white fs-15">Total Mahasiswa Bimbingan</p>
                                     </div>
-                                    <h3 class="mb-0 fs-22 text-white me-3">6</h3>
+                                    <h3 class="mb-0 fs-22 text-white me-3"><?php echo $jumlah; ?></h3>
                                 </div>
                             </div>
 
@@ -119,34 +141,17 @@ $user_id = $dosen_data['user_id'];
                                                 </thead>
                                                 <tbody>
                                                    
-                                                    <?php 
-                                                    $no = 1 ;
-                                                    $dosen_id = $dosen_data['dosen_id'];
-                                                    $query = mysqli_query($conn, "SELECT 
-                                                        pembagian_pembimbing.*,
-                                                        mahasiswa.*,
-                                                        prodi.prodi_name AS prodi_nama,
-                                                        jurusan.jurusan_name AS jurusan_nama
-                                                        FROM 
-                                                        pembagian_pembimbing
-                                                        JOIN 
-                                                        mahasiswa ON pembagian_pembimbing.mahasiswa_id = mahasiswa.mahasiswa_id
-                                                        JOIN 
-                                                        prodi ON mahasiswa.prodi_id = prodi.prodi_id
-                                                        JOIN 
-                                                        jurusan ON prodi.jurusan_id = jurusan.jurusan_id
-                                                        WHERE 
-                                                        pembagian_pembimbing.dosen_id = $dosen_id;
-                                                        ");
-                                                        while($row = mysqli_fetch_array($query)){ ?>
-                                                            <tr>
-                                                                <td><?php echo $no++; ?></td>
-                                                                <td><?php echo $row['fullname'] ?></td>
-                                                                <td><?php echo $row['nim'] ?></td>
-                                                                <td><?php echo $row['jurusan_nama'] ?></td>
-                                                                <td><?php echo $row['prodi_nama'] ?></td>
-                                                                <td><?php echo $row['semester'] ?></td>
-                                                            </tr>
+                                                    <?php
+
+                                                    while ($row = mysqli_fetch_array($query)) { ?>
+                                                                                    <tr>
+                                                                                        <td><?php echo $no++; ?></td>
+                                                                                        <td><?php echo $row['fullname'] ?></td>
+                                                                                        <td><?php echo $row['nim'] ?></td>
+                                                                                        <td><?php echo $row['jurusan_nama'] ?></td>
+                                                                                        <td><?php echo $row['prodi_nama'] ?></td>
+                                                                                        <td><?php echo $row['semester'] ?></td>
+                                                                                    </tr>
                                                         <?php } ?>
                                                     </tbody>
                                                 </table>

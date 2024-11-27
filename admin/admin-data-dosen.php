@@ -318,63 +318,63 @@ $conn = getConnection();
                                                 $no = 1;
                                                 $query = mysqli_query($conn, "SELECT dosen.*, users.* FROM dosen JOIN users ON dosen.user_id = users.user_id  WHERE dosen.deleted_at IS NULL AND users.deleted_at IS NULL;");
                                                 while ($row = mysqli_fetch_array($query)) {
-                                                ?>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $no++; ?>
-                                                    </td>
-                                                    <td>
-                                                        <div class="flex-shrink-0 align-self-center foto-dosen"
-                                                            style="cursor: pointer;">
-                                                            <div class="align-content-center text-center border border-dashed rounded-circle p-1 foto-dosen"
-                                                                style="width: 50px; height: 50px;"
-                                                                data-url="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
-                                                                data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
-                                                                data-nip="<?php echo htmlspecialchars($row['nip']); ?>"
-                                                                data-bs-toggle="modal" data-bs-target="#modalFotoDosen"
-                                                                onclick="openFoto('../media/<?php echo htmlspecialchars($row['profile_photo']); ?>')">
-                                                                <img src="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
-                                                                    onerror="this.onerror=null; this.src='../media/blank_profile.png';"
-                                                                    class="avatar avatar-sm rounded-circle"
-                                                                    style="width: 100%; height: 100%; object-fit: cover;"
-                                                                    alt="Foto Dosen">
+                                                    ?>
+                                                    <tr>
+                                                        <td>
+                                                            <?php echo $no++; ?>
+                                                        </td>
+                                                        <td>
+                                                            <div class="flex-shrink-0 align-self-center foto-dosen"
+                                                                style="cursor: pointer;">
+                                                                <div class="align-content-center text-center border border-dashed rounded-circle p-1 foto-dosen"
+                                                                    style="width: 50px; height: 50px;"
+                                                                    data-url="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
+                                                                    data-fullname="<?php echo htmlspecialchars($row['fullname']); ?>"
+                                                                    data-nip="<?php echo htmlspecialchars($row['nip']); ?>"
+                                                                    data-bs-toggle="modal" data-bs-target="#modalFotoDosen"
+                                                                    onclick="openFoto('../media/<?php echo htmlspecialchars($row['profile_photo']); ?>')">
+                                                                    <img src="../media/<?php echo htmlspecialchars($row['profile_photo']); ?>"
+                                                                        onerror="this.onerror=null; this.src='../media/blank_profile.png';"
+                                                                        class="avatar avatar-sm rounded-circle"
+                                                                        style="width: 100%; height: 100%; object-fit: cover;"
+                                                                        alt="Foto Dosen">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row['nip']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php echo $row['fullname']; ?>
-                                                    </td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <div class="d-grid gap-2"
-                                                                style="grid-template-columns: repeat(2, 1fr);">
-                                                                <button
-                                                                    onclick="editDosen('<?php echo $row['user_id']; ?>', '<?php echo $row['nip']; ?>', '<?php echo $row['fullname']; ?>')"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-title="Edit Data Dosen"
-                                                                    class="btn btn-sm btn-warning btn-edit-dosen">
-                                                                    <i class="mdi mdi-pencil"></i>
-                                                                </button>
-                                                                <a href="javascript:void(0);" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Hapus Data Dosen"
-                                                                    onclick="deleteDosen('<?php echo $row['user_id']; ?>')"
-                                                                    class="btn btn-sm btn-danger btn-delete">
-                                                                    <i class="mdi mdi-delete"></i>
-                                                                </a>
-                                                                <button class="btn btn-sm btn-info btn-edit-password"
-                                                                    onclick="editPassDosen('<?php echo $row['user_id']; ?>')"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-title="Ganti Password Dosen"
-                                                                    data-user-id="<?php echo $row['user_id']; ?>">
-                                                                    <i class="mdi mdi-key"></i>
-                                                                </button>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['nip']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $row['fullname']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <div class="row">
+                                                                <div class="d-grid gap-2"
+                                                                    style="grid-template-columns: repeat(2, 1fr);">
+                                                                    <button
+                                                                        onclick="editDosen('<?php echo $row['user_id']; ?>', '<?php echo $row['nip']; ?>', '<?php echo $row['fullname']; ?>')"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-title="Edit Data Dosen"
+                                                                        class="btn btn-sm btn-warning btn-edit-dosen">
+                                                                        <i class="mdi mdi-pencil"></i>
+                                                                    </button>
+                                                                    <a href="javascript:void(0);" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Hapus Data Dosen"
+                                                                        onclick="deleteDosen('<?php echo $row['user_id']; ?>')"
+                                                                        class="btn btn-sm btn-danger btn-delete">
+                                                                        <i class="mdi mdi-delete"></i>
+                                                                    </a>
+                                                                    <button class="btn btn-sm btn-info btn-edit-password"
+                                                                        onclick="editPassDosen('<?php echo $row['user_id']; ?>')"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-title="Ganti Password Dosen"
+                                                                        data-user-id="<?php echo $row['user_id']; ?>">
+                                                                        <i class="mdi mdi-key"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
